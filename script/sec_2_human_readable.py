@@ -11,10 +11,12 @@ def sec_2_human_readable(seconds: int) -> str:
 
     for unit, seconds_in_unit in time_units.items():
         calcd_time = seconds // seconds_in_unit
+
+        if calcd_time == 0:
+            continue
+
         human_readable.append(f"{calcd_time} {unit}{'s' if calcd_time != 1 else ''}")
         seconds = seconds % seconds_in_unit
-
-    human_readable = list(filter(lambda s: not s.startswith('0'), human_readable))
 
     if len(human_readable) == 1:
         return human_readable[0]
