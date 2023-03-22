@@ -1,0 +1,10 @@
+nginx:
+  image:
+    repository: nginx
+    tag: 1.21.6-alpine
+  containerPort: 80
+  servicePort: 8080
+
+ingress:
+  host: my-site.example.local
+  className: nginx

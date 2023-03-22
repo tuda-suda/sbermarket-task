@@ -1,0 +1,5 @@
+apiVersion: v2
+type: application
+name: sbermarket-task
+
+version: 0.0.1
