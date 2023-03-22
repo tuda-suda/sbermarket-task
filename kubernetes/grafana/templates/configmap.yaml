@@ -5,14 +5,18 @@ metadata:
   labels:
      grafana_datasource: "1"
 data:
-  promdatasource.yaml: |
+  grafana.ini: |+
+    [auth.anonymous]
+    enabled = true
+    org_role = Editor
+  datasource.yaml: |+
     apiVersion: 1
     datasources:
       - name: prometheus
         type: prometheus
         access: proxy
         url: http://prometheus:9090/
-  dashboards.yml: |
+  dashboards.yaml: |+
     apiVersion: 1
     providers:
         - name: default
@@ -23,7 +27,7 @@ data:
           editable: true
           options:
             path: /etc/grafana/dashboard.json
-  dashboard.json: |
+  dashboard.json: |+
     {
       "annotations": {
         "list": [
@@ -47,11 +51,14 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "id": 1,
       "links": [],
       "liveNow": false,
       "panels": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -125,7 +132,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "IcHXZIf4k"
+                "uid": "P1809F7CD0C75ACF3"
               },
               "exemplar": true,
               "expr": "nginx_up",
@@ -138,6 +145,10 @@ data:
           "type": "timeseries"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -210,7 +221,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "IcHXZIf4k"
+                "uid": "P1809F7CD0C75ACF3"
               },
               "exemplar": true,
               "expr": "rate(nginx_http_requests_total[5m])",
@@ -223,6 +234,10 @@ data:
           "type": "timeseries"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -295,7 +310,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "IcHXZIf4k"
+                "uid": "P1809F7CD0C75ACF3"
               },
               "exemplar": true,
               "expr": "rate(nginx_connections_handled[5m])",
@@ -323,6 +338,6 @@ data:
       "timezone": "",
       "title": "Nginx",
       "uid": "UiUn7IBVz",
-      "version": 2,
+      "version": 1,
       "weekStart": ""
     }

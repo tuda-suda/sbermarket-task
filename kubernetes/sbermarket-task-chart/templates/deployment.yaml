@@ -29,7 +29,7 @@ spec:
           - name: html
             mountPath: /usr/share/nginx/site/
           resources:
-            limit:
+            limits:
               cpu: 500m
               memory: 1Gi
         - name: nginx-exporter
@@ -40,7 +40,7 @@ spec:
           - name: nginx-ex-port
             containerPort: 9113
           resources:
-            limit:
+            limits:
               cpu: 250m
               memory: 500Mi
       volumes:
