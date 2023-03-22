@@ -29,6 +29,9 @@ spec:
           image: 'nginx/nginx-prometheus-exporter:0.10.0'
           args:
             - '-nginx.scrape-uri=http://localhost/nginx_status'
+          ports:
+          - name: nginx-ex-port
+            containerPort: 9113
       volumes:
       - name: nginx-conf
         configMap:

@@ -11,10 +11,14 @@ data:
       server_name {{ .Values.ingress.host }};
 
       location / {
-        # deny 192.168.10.0/24;
+        deny 192.168.10.0/24;
         root  /usr/share/nginx/site;
         index index.html;
-        try_files $uri $uri/ /index.html;
+        # try_files $uri $uri/ /index.html;
+      }
+
+      location /nginx_status {
+        stub_status;
       }
     }
 ---

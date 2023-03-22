@@ -3,7 +3,7 @@ nginx:
     repository: nginx
     tag: 1.21.6-alpine
   containerPort: 80
-  servicePort: 8080
+  servicePort: 80
 
 ingress:
   host: my-site.example.local
