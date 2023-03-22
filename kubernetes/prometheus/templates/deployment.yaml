@@ -1,0 +1,44 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: prometheus
+    provider: prometheus
+spec:
+  selector:
+    matchLabels:
+      app: prometheus
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: prometheus
+      annotations:
+        prometheus.io/scrape: 'false'
+    spec:
+      terminationGracePeriodSeconds: 90
+      restartPolicy: Always
+      volumes:
+      - name: config
+        configMap:
+          name: prometheus-conf
+      containers:
+      - name: prometheus
+        image: prom/prometheus
+        args:
+          - --config.file=/etc/prometheus/prometheus.yml
+          - --web.enable-lifecycle
+          - --log.level=debug
+        ports:
+          - containerPort: 9090
+        volumeMounts:
+        - name: config
+          mountPath: /etc/prometheus/
+          readOnly: true
+        resources:
+          limits:
+            cpu: 1
+            memory: 1Gi

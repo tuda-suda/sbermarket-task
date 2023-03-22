@@ -13,6 +13,9 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: {{ .Chart.Name }}-nginx
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '9113'
     spec:
       containers:
         - image: {{ .Values.nginx.image.repository }}:{{ .Values.nginx.image.tag }}
@@ -28,7 +31,7 @@ spec:
         - name: nginx-exporter
           image: 'nginx/nginx-prometheus-exporter:0.10.0'
           args:
-            - '-nginx.scrape-uri=http://localhost/nginx_status'
+            - '-nginx.scrape-uri=http://localhost/metrics'
           ports:
           - name: nginx-ex-port
             containerPort: 9113

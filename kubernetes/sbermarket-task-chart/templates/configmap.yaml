@@ -17,7 +17,7 @@ data:
         # try_files $uri $uri/ /index.html;
       }
 
-      location /nginx_status {
+      location /metrics {
         stub_status;
       }
     }
