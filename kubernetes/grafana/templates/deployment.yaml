@@ -43,25 +43,25 @@ spec:
               port: 3000
             timeoutSeconds: 1
           resources:
-            requests:
-              cpu: 250m
-              memory: 750Mi
+            limit:
+              cpu: 500m
+              memory: 1Gi
           volumeMounts:
             - name: grafana-pv
               mountPath: /var/lib/grafana
-            # - name: grafana-config-volume
-            #   mountPath: /etc/grafana/
+            - name: grafana-config-volume
+              mountPath: /etc/grafana/
       volumes:
         - name: grafana-pv
           persistentVolumeClaim:
             claimName: grafana-pvc
-        # - name: grafana-config-volume
-        #   configMap:
-        #     name: grafana-config
-        #     items:
-        #     - key: datasource.yml
-        #       path: provisioning/datasources/datasource.yml
-        #     - key: dashboards.yml
-        #       path: provisioning/dashboards/dashboards.yml
-        #     - key: dashboard.json
-        #       path: dashboard.json
+        - name: grafana-config-volume
+          configMap:
+            name: grafana-config
+            items:
+            - key: datasource.yml
+              path: provisioning/datasources/datasource.yml
+            - key: dashboards.yml
+              path: provisioning/dashboards/dashboards.yml
+            - key: dashboard.json
+              path: dashboard.json

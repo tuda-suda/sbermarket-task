@@ -18,8 +18,8 @@ spec:
         prometheus.io/port: '9113'
     spec:
       containers:
-        - image: {{ .Values.nginx.image.repository }}:{{ .Values.nginx.image.tag }}
-          name: {{ .Chart.Name }}
+        - name: {{ .Chart.Name }}
+          image: {{ .Values.nginx.image.repository }}:{{ .Values.nginx.image.tag }}
           ports:
             - name: {{ .Chart.Name }}
               containerPort: {{ .Values.nginx.containerPort }}
@@ -28,6 +28,10 @@ spec:
             mountPath: /etc/nginx/conf.d/
           - name: html
             mountPath: /usr/share/nginx/site/
+          resources:
+            limit:
+              cpu: 500m
+              memory: 1Gi
         - name: nginx-exporter
           image: 'nginx/nginx-prometheus-exporter:0.10.0'
           args:
@@ -35,6 +39,10 @@ spec:
           ports:
           - name: nginx-ex-port
             containerPort: 9113
+          resources:
+            limit:
+              cpu: 250m
+              memory: 500Mi
       volumes:
       - name: nginx-conf
         configMap:
