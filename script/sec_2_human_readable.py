@@ -1,4 +1,7 @@
 def sec_2_human_readable(seconds: int) -> str:
+    if seconds < 1:
+        return "No"
+
     time_units = {
         'year': 31536000,
         'day': 86400,
@@ -22,7 +25,10 @@ def sec_2_human_readable(seconds: int) -> str:
         return human_readable[0]
     return ' and '.join([', '.join(human_readable[:-1]), human_readable[-1]])
 
+
 if __name__ == '__main__':
+    print(sec_2_human_readable(-50))
+    print(sec_2_human_readable(0))
     print(sec_2_human_readable(60))
     print(sec_2_human_readable(62))
     print(sec_2_human_readable(3600))
